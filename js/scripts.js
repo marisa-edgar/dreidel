@@ -1,46 +1,46 @@
 function Player(turn){
   this.spin = 0;
-  this.tempscore = 0;
-  this.totalscore = 0;
+  this.tempScore = 0;
+  this.totalScore = 0;
   this.turn = turn;
   this.playerName;
 }
 let player1 ="";
 let player2 ="";
 
-let spindreidel =function () {
+let spinDreidel =function () {
   return Math.floor(4*.random())+1;
 }
 
-Player.prototype.spinone = function() {
+Player.prototype.spinOne = function() {
   if (this.spin === 1) {
-    this.tempscore = 0;
+    this.tempScore = 0;
     alert("sorry" + this.playerName + ",you got nun nothing happens")
 
   } else {
-    this.tempscore += this.spin;
+    this.tempScore += this.spin;
   }
 }
 
 
 Player.prototype.hold = function () {
-  this.totalscore += this.tempscore;
-  this.tempscore = 0;
+  this.totalScore += this.tempScore;
+  this.tempScore = 0;
 
   alert(this.playerName + ",your turn is over");
 }
 
 
-Player.prototype.winnerCheck = function () {
-  if (this.totalscore >= 100) {
-    alert(this.playerName + "you are the winner");
-  }
-}
+// Player.prototype.winnerCheck = function () {
+//   if (this.totalScore >= 100) {
+//     alert(this.playerName + "you are the winner");
+//   }
+// }
 
 Player.prototype.newGame = function () {
   this.spin = 0;
-  this.tempscore = 0;
-  this.totalscore = 0;
+  this.tempScore = 0;
+  this.totalScore = 0;
   this.playerName = "";
 }
 
@@ -81,33 +81,33 @@ $(document).ready(function() {
   });
 
   $("button#player1-spin").click(function(event){
-    player1.spin = spindreidel();
+    player1.spin = spinDreidel();
     $("#dreidel-spin-1").text(player1.spin);
-    player1.spinone();
-    $("#round-total-1").text(player1.tempscore);
+    player1.spinOne();
+    $("#round-total-1").text(player1.tempScore);
   });
 
   $("button#player2-spin").click(function(event){
-    player2.spin = spindreidel();
+    player2.spin = spinDreidel();
     $("#dreidel-spin-2").text(player2.spin);
-    player2.spinone();
-    $("#round-total-2").text(player2.tempscore);
+    player2.spinOne();
+    $("#round-total-2").text(player2.tempScore);
   });
 
   $("button#player1-hold").click(function(event){
     player1.hold();
-    $("#total-score-1").text(player1.totalscore);
+    $("#total-score-1").text(player1.totalScore);
     $("#round-total-1").empty();
     $("#dreidel-spin-1").empty();
-    player1.winnercheck();
+    player1.winnerCheck();
   });
 
   $("button#player2-hold").click(function(event){
     player2.hold();
-    $("#total-score-2").text(player2.totalscore);
+    $("#total-score-2").text(player2.totalScore);
     $("#round-total-2").empty();
     $("#dreidel-spin-2").empty();
-    player2.winnercheck();
+    player2.winnerCheck();
   });
 
 });
